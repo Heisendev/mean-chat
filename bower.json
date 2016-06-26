@@ -1,0 +1,10 @@
+{
+  "name": "mean-chat",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Michael Hermet",
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-route": "^1.5.7"
+  }
+}
