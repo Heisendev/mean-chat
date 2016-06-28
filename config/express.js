@@ -42,7 +42,7 @@ module.exports = function(db) {
 
 	// Configure the MongoDB session storage
 	var mongoStore = new MongoStore({
-        db: db.connection.db
+        mongooseConnection: db.connection
     });
 
 	// Configure the 'session' middleware

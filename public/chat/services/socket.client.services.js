@@ -26,6 +26,6 @@ angular.module('chat').service('Socket', ['Authentication', '$location', '$timeo
           this.socket.removeListener(eventName);
         }
       };
-      
+
   }
 ]);
