@@ -1,6 +1,6 @@
 var appName = 'mean-chat';
 
-var app = angular.module(appName, ['ngRoute', 'users', 'example']);
+var app = angular.module(appName, ['ngResource', 'ngRoute', 'users', 'example', 'articles']);
 
 app.config(['$locationProvider', function($locationProvider){
   $locationProvider.hashPrefix('!');
