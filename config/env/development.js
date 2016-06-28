@@ -1,5 +1,5 @@
 module.exports = {
-  sessionSecret: 'develomentSessionSecret',
+  sessionSecret: 'developmentSessionSecret',
   db: 'mongodb://localhost/mean-book',
   facebook: {
     clientID: '740912342706347',
