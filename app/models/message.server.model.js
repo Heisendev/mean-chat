@@ -6,7 +6,7 @@ var MessageSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	messageText: {
+	text: {
 		type: String,
 		required: 'Mhh a message without a messageText: weird',
 		default: '',
@@ -15,7 +15,7 @@ var MessageSchema = new Schema({
 	creator: {
     required: 'Give this message a parent dammit!',
 		type: Schema.ObjectId,
-		ref: 'User',
+		ref: 'User'
 	}
 });
 

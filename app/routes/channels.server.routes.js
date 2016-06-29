@@ -7,11 +7,19 @@ module.exports = function(app){
 		.get(channels.list)
 		.post(users.requiresLogin, channels.create);
 
-	app.route('/api/articles/:channelId')
+	app.route('/api/channels/:channelId')
 		.get(channels.read)
-		.put(users.requiresLogin, messages.create, channels.update)
 		.delete(users.requiresLogin, channels.hasAuthorization, channels.delete);
     //TODO: will need to delete all orphan messages
+	
+	app.route('/api/channels/:channelId/messages')
+		.post(users.requiresLogin, messages.create, channels.addMessage)
+		.get(users.requiresLogin, channels.listMessage);
 
-	app.param('articleId', channels.channelByID);
+
+	app.route('/api/channels/:channelId/messages/:messageId')
+		.get(users.requiresLogin, messages.read);
+
+	app.param('channelId', channels.channelByName);
+	app.param('messageId', messages.messageByID);
 };

@@ -26,6 +26,26 @@ angular.module('chat').service('Socket', ['Authentication', '$location', '$timeo
           this.socket.removeListener(eventName);
         }
       };
-
+  }
+]).factory('Channels', ['$resource',
+  function($resource){
+    return $resource('api/channels/:channelId', {
+      channelId: '@_id'
+    }, {
+      update : {
+        method: 'PUT'
+      }
+    });
+  }
+]).factory('Messages', ['$resource',
+  function($resource){
+    return $resource('api/channels/:channelId/messages/:messageId', {
+      channelId: '@channelId',
+      messageId: '@_id'
+    }, {
+      update: {
+        method: 'PUT'
+      }
+    });
   }
 ]);

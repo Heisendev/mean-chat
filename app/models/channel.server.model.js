@@ -13,7 +13,7 @@ var ChannelSchema = new Schema({
 		trim: true
 	},
   messages: [
-    msg: {
+    {
       type: Schema.ObjectId,
   		ref: 'Message'
     }

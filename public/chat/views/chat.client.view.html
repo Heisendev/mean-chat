@@ -13,8 +13,17 @@
       <span ng-bind="message.text"></span>
     </span>
   </div>
+  <aside>
+    <form ng-submit="createChannel();">
+      <input type="text" id="name" ng-model="name">
+      <input type="submit">
+    </form>
+  </aside>
   <form ng-submit="sendMessage();">
     <input type="text" ng-model="messageText">
     <input type="submit">
   </form>
+  <ul ng-repeat="channel in channels">
+    <li ng-bind="channel.name"></li>
+  </ul>
 </section>
