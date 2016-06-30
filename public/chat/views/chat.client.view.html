@@ -1,29 +1,39 @@
-<section ng-controller="ChatController">
-  <div ng-repeat="message in messages" ng-switch="message.type">
-    <strong ng-switch-when='status'>
-      <span ng-bind="message.created | date: 'mediumTime'"></span>
-      <span ng-bind="message.username"></span>
-      <span>is</span>
-      <span ng-bind="message.text"></span>
-    </strong>
-    <span ng-switch-default>
-      <span ng-bind="message.created | date: 'mediumTime'"></span>
-      <span ng-bind="message.username"></span>
-      <span>:</span>
-      <span ng-bind="message.text"></span>
-    </span>
-  </div>
-  <aside>
-    <form ng-submit="createChannel();">
-      <input type="text" id="name" ng-model="name">
-      <input type="submit">
-    </form>
+<div class="wrapper" ng-controller="ChatController">
+  <aside id="aside-1" class="aside">
+    <h1>Channels</h1>
+      <ul ng-repeat="channel in channels">
+          <li><a href="/#!/chat/{{channel.name}}" ng-bind="channel.name"></a></li>
+      </ul>
+      <form ng-submit="createChannel();">
+          <input type="text" id="name" ng-model="name">
+          <input type="submit">
+      </form>
   </aside>
-  <form ng-submit="sendMessage();">
-    <input type="text" ng-model="messageText">
-    <input type="submit">
-  </form>
-  <ul ng-repeat="channel in channels">
-    <li ng-bind="channel.name"></li>
-  </ul>
-</section>
+  <div class="main">
+    <div class="header">Header</div>
+    <div class="messages">
+      <div ng-repeat="message in messages" ng-switch="message.type">
+          <strong ng-switch-when='status'>
+        <span ng-bind="message.created | date: 'mediumTime'"></span>
+        <span ng-bind="message.username"></span>
+        <span>is</span>
+        <span ng-bind="message.text"></span>
+      </strong>
+          <span ng-switch-default>
+        <span ng-bind="message.created | date: 'mediumTime'"></span>
+          <span ng-bind="message.username"></span>
+          <span>:</span>
+          <span ng-bind="message.text"></span>
+          </span>
+      </div>
+    </div>
+
+    <aside class="aside aside-2">Aside 2</aside>
+    <footer class="footer">
+        <form class="message-form" ng-submit="sendMessage();">
+            <textarea type="text" ng-model="messageText"></textarea>
+            <input type="submit">
+        </form>
+    </footer>
+  </div>
+</div>
