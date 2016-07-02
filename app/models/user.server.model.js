@@ -18,7 +18,9 @@ var UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['Admin', 'Owner', 'User']
+    enum: ['Admin', 'Owner', 'User'],
+    default: 'User',
+    required: true
   },
   password: {
     type: String,

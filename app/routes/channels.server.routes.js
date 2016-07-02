@@ -16,10 +16,10 @@ module.exports = function(app){
 		.post(users.requiresLogin, messages.create, channels.addMessage)
 		.get(users.requiresLogin, channels.listMessage);
 
-
-	app.route('/api/channels/:channelId/messages/:messageId')
-		.get(users.requiresLogin, messages.read);
+	
+	/*app.route('/api/channels/:channelId/messages/:messageId')
+		.get(users.requiresLogin, messages.read);*/
 
 	app.param('channelId', channels.channelByName);
-	app.param('messageId', messages.messageByID);
+	//app.param('messageId', messages.messageByID);
 };

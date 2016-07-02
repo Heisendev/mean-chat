@@ -1,6 +1,5 @@
 .wrapper {
   display: flex;
-  flex-flow: row wrap;
   height: 100%;
 }
 
@@ -12,13 +11,26 @@
 .messages{
   flex-grow: 1;
   margin: 10px;
+  overflow-y: auto;
 }
+.message-author, .message-time{
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 12px;
+}
+.message-text{
+  white-space: pre-wrap;
+}
+
+
 section{
   height: 100%;
 }
 body{
   height: 100vh;
   margin: 0;
+  font-family: 'Lato', sans-serif;
 }
 footer{
   max-height: 20%;
@@ -29,6 +41,9 @@ form.message-form{
 }
 form.message-form > textarea{
   flex-grow: 1;
+  resize: none;
+  outline: none;
+  overflow: auto;
 }
 #aside-1{
   max-width: 200px;

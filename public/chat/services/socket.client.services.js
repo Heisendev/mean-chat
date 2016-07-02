@@ -29,20 +29,16 @@ angular.module('chat').service('Socket', ['Authentication', '$location', '$timeo
   }
 ]).factory('Channels', ['$resource',
   function($resource){
-    return $resource('api/channels/:channelId', {
-      channelId: '@_id'
-    }, {
-      update : {
-        method: 'PUT'
+    return $resource('api/channels/:channelId', {channelId: '@channelId'}, {
+        update : {
+          method: 'PUT'
+        }
       }
-    });
+    );
   }
 ]).factory('Messages', ['$resource',
   function($resource){
-    return $resource('api/channels/:channelId/messages/:messageId', {
-      channelId: '@channelId',
-      messageId: '@_id'
-    }, {
+    return $resource('api/channels/:channelId/messages/:messageId', {channelId: '@channelId', messageId: '@_id'} , {
       update: {
         method: 'PUT'
       }

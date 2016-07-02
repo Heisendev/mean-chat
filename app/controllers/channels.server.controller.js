@@ -2,9 +2,11 @@ var mongoose = require('mongoose'),
 		Channel = mongoose.model('Channel');
 
 exports.channelByName = function(req, res, next, name){
-	Channel.findOne({name: name}).populate('creator', 'username').exec(function(err, channel){
+	console.log('in channelByName', name);
+	Channel.findOne({name: name}).populate('creator', 'username fullName').exec(function(err, channel){
 		if(err) return next(err);
 		if(!channel) return next(new Error('Failed to load channel' + id));
+		console.log('REALLY in channelByName', channel.name);
 		req.channel = channel;
 		next();
 	});
@@ -57,12 +59,16 @@ exports.delete = function(req, res){
 exports.addMessage = function(req, res){
 	var channel = req.channel;
 	var message = req.message;
+	console.log("channel === ", req.body.channelId);
 	Channel.findByIdAndUpdate(
-	    channel._id,
+	    channel.id,
 	    {$push: {"messages": message}},
 	    {safe: true, upsert: true},
 	    function(err, model) {
-	        console.log(err);
+		    if(!err){
+			    res.json(message);
+		    }
+		    console.log('message added', message.text);
 	    }
 	);
 };
@@ -77,12 +83,13 @@ exports.hasAuthorization = function(req, res, next){
 };
 
 exports.listMessage = function(req, res){
-	Channel.findOne({name: req.channel.name}).populate('creator', 'firstName lastName fullName').populate('messages').exec(function(err, channel){
+	Channel.findOne({name: req.channel.name}).populate('creator', 'username firstName lastName fullName').populate('messages').exec(function(err, channel){
 		if(err){
 			return res.status(400).send({
 				message: getErrorMessage(err)
 			});
 		} else {
+			//console.log('test', channel);
 			res.json(channel.messages);
 		}
 	});

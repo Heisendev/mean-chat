@@ -2,7 +2,10 @@
   <aside id="aside-1" class="aside">
     <h1>Channels</h1>
       <ul ng-repeat="channel in channels">
-          <li><a href="/#!/chat/{{channel.name}}" ng-bind="channel.name"></a></li>
+          <li>
+              <a href="/#!/chat/{{channel.name}}" ng-bind="channel.name"></a>
+              <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'">x</a>
+          </li>
       </ul>
       <form ng-submit="createChannel();">
           <input type="text" id="name" ng-model="name">
@@ -14,25 +17,24 @@
     <div class="messages">
       <div ng-repeat="message in messages" ng-switch="message.type">
           <strong ng-switch-when='status'>
-        <span ng-bind="message.created | date: 'mediumTime'"></span>
-        <span ng-bind="message.username"></span>
+        <span class="message-time" ng-bind="message.created | date: 'mediumTime'"></span>
+        <span class="message-author" ng-bind="message.username"></span>
         <span>is</span>
-        <span ng-bind="message.text"></span>
+        <span class="message-text" ng-bind="message.text"></span>
       </strong>
           <span ng-switch-default>
-        <span ng-bind="message.created | date: 'mediumTime'"></span>
-          <span ng-bind="message.username"></span>
+        <span class="message-time" ng-bind="message.created | date: 'HH:mm'"></span>
+          <span class="message-author" ng-bind="message.username"></span>
           <span>:</span>
-          <span ng-bind="message.text"></span>
+          <span class="message-text" ng-bind="message.text"></span>
           </span>
       </div>
     </div>
 
     <aside class="aside aside-2">Aside 2</aside>
     <footer class="footer">
-        <form class="message-form" ng-submit="sendMessage();">
-            <textarea type="text" ng-model="messageText"></textarea>
-            <input type="submit">
+        <form class="message-form">
+            <textarea ng-keydown="keyPressed($event)" id="message-input" type="text" ng-model="messageText" placeholder="Remember, be nice!"></textarea>
         </form>
     </footer>
   </div>
