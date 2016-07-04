@@ -106,3 +106,39 @@ exports.requiresLogin = function(req, res, next){
   }
   next();
 };
+
+exports.list = function(req, res){
+  User.find().sort('-username').exec(function(err, users){
+    if(err){
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(users);
+    }
+  });
+};
+
+exports.read = function(req, res){
+  res.json(req.userFound);
+};
+
+
+exports.userByID = function(req, res, next, id){
+  User.findById(id).exec(function(err, user){
+    if(err) return next(err);
+    if(!user) return next(new Error('Failed to load article' + id));
+    req.userFound = user;
+    console.log(user);
+    next();
+  });
+};
+
+exports.hasAuthorization = function(req, res, next){
+  if(req.userFound.id !== req.user.id && req.user.role !== 'admin'){
+    return res.status(403).send({
+      message: 'User is not authorized'
+    });
+  }
+  next();
+};

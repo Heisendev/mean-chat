@@ -1,11 +1,13 @@
-angular.module('chat').controller('ChatController', ['$scope', 'Authentication', '$location', '$routeParams', 'Socket', 'Channels', 'Messages',
-  function($scope, Authentication, $location, $routeParams, Socket, Channels, Messages){
+angular.module('chat').controller('ChatController', ['$scope', 'Authentication', '$location', '$routeParams', 'Socket','UsersAPI',  'Channels', 'Messages',
+  function($scope, Authentication, $location, $routeParams, Socket, UsersAPI, Channels, Messages){
 
     $scope.user = Authentication.user;
     $scope.channel = $routeParams.channel;
     $scope.glued = true;
 
     $scope.messages = [];
+
+    $scope.users = UsersAPI.query();
     var messagesChan = Messages.query({channelId: $scope.channel}, function(res){
       res.forEach(function(el){
         $scope.messages.push(el);

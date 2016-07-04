@@ -54,4 +54,11 @@ module.exports = function(app) {
 
 
   app.get('/signout', users.signout);
+
+  app.route('/api/users')
+    .get(users.requiresLogin, users.list);
+  app.route('/api/users/:userId')
+    .get(users.requiresLogin, users.hasAuthorization, users.read);
+
+  app.param('userId', users.userByID);
 };

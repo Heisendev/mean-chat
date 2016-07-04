@@ -3,7 +3,7 @@
     <h1>Channels</h1>
       <ul ng-repeat="channel in channels">
           <li>
-              <a href="/#!/chat/{{channel.name}}" ng-bind="channel.name"></a>
+              <a href="/#!/{{channel.name}}" ng-bind="channel.name"></a>
               <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'">x</a>
           </li>
       </ul>
@@ -11,6 +11,12 @@
           <input type="text" id="name" ng-model="name">
           <input type="submit">
       </form>
+      <h2>Users</h2>
+      <ul ng-repeat="user in users">
+          <li>
+              <a href="/#!/users/edit/{{user._id}}" ng-bind="user.username"></a>
+          </li>
+      </ul>
   </aside>
   <div class="main">
     <div class="header" ng-bind="channel"></div>
