@@ -12,8 +12,8 @@
           <input type="submit">
       </form>
       <h2>Users</h2>
-      <ul ng-repeat="user in users">
-          <li>
+      <ul id="user-list">
+          <li ng-repeat="user in users" ng-class="{connected : user.isConnected}">
               <a href="/#!/users/edit/{{user._id}}" ng-bind="user.username"></a>
           </li>
       </ul>

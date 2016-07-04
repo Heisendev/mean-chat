@@ -77,6 +77,10 @@ form.message-form > textarea{
   display: none;
 }
 
+#user-list li.connected a{
+  color: #ACD660;
+}
+
 
 .color-primary-0 { color: #3A6570 }	/* Main Primary color */
 .color-primary-1 { color: #4499AD }
