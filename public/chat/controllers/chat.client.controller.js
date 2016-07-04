@@ -3,14 +3,13 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
 
     $scope.user = Authentication.user;
     $scope.channel = $routeParams.channel;
+    $scope.glued = true;
 
     $scope.messages = [];
     var messagesChan = Messages.query({channelId: $scope.channel}, function(res){
       res.forEach(function(el){
-        console.log(el);
         $scope.messages.push(el);
       });
-      console.log(arguments);
     });
     //si il n'y a pas de channel on en créé un par défaut : Général
     $scope.channels = Channels.query(function(result){
@@ -28,25 +27,27 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
     });
 
     $scope.keyPressed = function(event){
-      if(event.which === 13 && !event.shiftKey && !event.altKey && event.target.value !== '\n'){
+      if(event.target.value.length === 0 && event.which === 13){
+        event.preventDefault();
+      }
+      else if(event.which === 13 && !event.shiftKey && !event.altKey){
+        event.preventDefault();
         var msg = {
           text: event.target.value
         };
         var message = new Messages({channelId: $scope.channel, text: msg.text});
-        console.log(message);
         message.$save(function(){
-          console.log('$save called', arguments);
         }, function(errorResponse){
           console.log('error', errorResponse);
           $scope.error = errorResponse.data.message;
         });
-        Socket.emit('chatMessage', msg);
         $scope.messageText = '';
+        Socket.emit('chatMessage', msg);
       }
     };
 
-
     Socket.on('chatMessage', function(message){
+      console.log(message);
       $scope.messages.push(message);
     });
 
@@ -72,14 +73,13 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
     $scope.removeChannel = function(channel){
       console.log(channel);
       if(channel){
-        //TODO this shit doesn't work yet :(
-        /*channel.$remove(function(){
+        channel.$remove(function(){
          for (var i in $scope.channels){
-         if($scope.channels[i] === channel){
-         $scope.channels.splice(i, 1);
+          if($scope.channels[i] === channel){
+            $scope.channels.splice(i, 1);
+          }
          }
-         }
-         });*/
+        });
       }
     };
   }

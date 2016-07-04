@@ -6,6 +6,10 @@
   "dependencies": {
     "angular": "^1.5.7",
     "angular-route": "^1.5.7",
-    "angular-resource": "^1.5.7"
+    "angular-resource": "^1.5.7",
+    "angularjs-scroll-glue": "^0.0.1",
+    "angular-emoji": "angular-emoji-filter#^0.0.2",
+    "angular-emoji-filter-hd": "^0.0.9",
+    "angular-sanitize": "^1.5.7"
   }
 }

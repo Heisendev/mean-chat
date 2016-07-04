@@ -1,14 +1,28 @@
 var mongoose = require('mongoose'),
-		Channel = mongoose.model('Channel');
+		Channel = mongoose.model('Channel'),
+		Message = mongoose.model('Message');
 
 exports.channelByName = function(req, res, next, name){
-	console.log('in channelByName', name);
-	Channel.findOne({name: name}).populate('creator', 'username fullName').exec(function(err, channel){
+	Channel.findOne({name: name}).populate('creator', 'username fullName').exec(function(err, channelByName){
 		if(err) return next(err);
-		if(!channel) return next(new Error('Failed to load channel' + id));
-		console.log('REALLY in channelByName', channel.name);
-		req.channel = channel;
-		next();
+		if(!channelByName){
+			Channel.findById(name).populate('creator', 'username fullName').exec(function(err, channelById){
+				if(err) return next(err);
+				if(!channelById) return res.status(404).send({
+					message: 'channel \'' + name + '\' not found'
+				});
+				console.log('in channelByName and found by id', name);
+				req.channel = channelById;
+				console.log(req.channel);
+				next();
+			});
+		}
+		else{
+			console.log('in channelByName and found by name', name);
+			req.channel = channelByName;
+			console.log(req.channel);
+			next();
+		}
 	});
 };
 
@@ -44,6 +58,7 @@ exports.read = function(req, res){
 };
 
 exports.delete = function(req, res){
+	console.log(req);
 	var channel = req.channel;
 	channel.remove(function(err){
 		if(err){
@@ -89,8 +104,20 @@ exports.listMessage = function(req, res){
 				message: getErrorMessage(err)
 			});
 		} else {
+				var msgProccessed = 0;
+				channel.messages.forEach(function(message, index){
+					console.log(message);
+					Message.findById(message).populate('creator', 'username').exec(function(err, msg){
+						channel.messages[index] = msg;
+						msgProccessed ++;
+						if(msgProccessed === channel.messages.length) {
+							console.log('msgProccessed', msgProccessed === channel.messages.length );
+							res.json(channel.messages);
+						}
+					});
+				});
 			//console.log('test', channel);
-			res.json(channel.messages);
+
 		}
 	});
 };

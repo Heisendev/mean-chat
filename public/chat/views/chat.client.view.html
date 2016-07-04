@@ -13,20 +13,20 @@
       </form>
   </aside>
   <div class="main">
-    <div class="header">Header</div>
-    <div class="messages">
+    <div class="header" ng-bind="channel"></div>
+    <div class="messages" scroll-glue>
       <div ng-repeat="message in messages" ng-switch="message.type">
-          <strong ng-switch-when='status'>
-        <span class="message-time" ng-bind="message.created | date: 'mediumTime'"></span>
-        <span class="message-author" ng-bind="message.username"></span>
-        <span>is</span>
-        <span class="message-text" ng-bind="message.text"></span>
-      </strong>
+          <strong ng-switch-when='status' class="message-status">
+            <span class="" ng-bind="message.created | date: 'HH:mm'"></span>
+            <span class="" ng-bind="message.creator.username"></span>
+            <span>is</span>
+            <span class="" ng-bind="message.text"></span>
+            </strong>
           <span ng-switch-default>
-        <span class="message-time" ng-bind="message.created | date: 'HH:mm'"></span>
-          <span class="message-author" ng-bind="message.username"></span>
-          <span>:</span>
-          <span class="message-text" ng-bind="message.text"></span>
+            <span class="message-time" ng-bind="message.created | date: 'HH:mm'"></span>
+            <span ng-hide="message.creator.username === messages[$index - 1].creator.username" class="message-author" ng-bind="message.creator.username"></span>
+            <span>:</span>
+            <span class="message-text" ng-bind-html="message.text | emoji"></span>
           </span>
       </div>
     </div>
@@ -34,7 +34,7 @@
     <aside class="aside aside-2">Aside 2</aside>
     <footer class="footer">
         <form class="message-form">
-            <textarea ng-keydown="keyPressed($event)" id="message-input" type="text" ng-model="messageText" placeholder="Remember, be nice!"></textarea>
+            <textarea ng-keydown="keyPressed($event)" id="message-input" type="text" ng-model="messageText" placeholder="Remember, be nice!" rows="3"></textarea>
         </form>
     </footer>
   </div>

@@ -1,6 +1,9 @@
 var appName = 'mean-chat';
 
-var app = angular.module(appName, ['ngResource', 'ngRoute', 'users', 'example', 'articles', 'chat']);
+var app = angular.module(appName, ['dbaq.emoji', 'ngResource', 'ngRoute', 'users', 'example', 'articles', 'chat', 'luegg.directives',  'ngSanitize'])
+  .config(function(emojiConfigProvider){
+    emojiConfigProvider.addAlias("smile", ":)");
+  });
 
 app.config(['$locationProvider', function($locationProvider){
   $locationProvider.hashPrefix('!');

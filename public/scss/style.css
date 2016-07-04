@@ -7,20 +7,31 @@
   display: flex;
   flex-grow: 1;
   flex-direction: column;
+  padding: 15px;
+}
+.header{
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.message-status{
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  font-weight: 400;
 }
 .messages{
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
   flex-grow: 1;
   margin: 10px;
   overflow-y: auto;
 }
 .message-author, .message-time{
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  font-style: italic;
-  font-size: 12px;
 }
+
 .message-text{
   white-space: pre-wrap;
+  font-weight: 300;
 }
 
 
@@ -34,16 +45,19 @@ body{
 }
 footer{
   max-height: 20%;
-  margin: 10px;
 }
 form.message-form{
   display: flex;
 }
 form.message-form > textarea{
+  font-family: 'Lato', sans-serif;
   flex-grow: 1;
   resize: none;
   outline: none;
   overflow: auto;
+  border-radius: 5px;
+  border: 1px solid #1C2527;
+  padding: 5px;
 }
 #aside-1{
   max-width: 200px;

@@ -29,7 +29,7 @@ angular.module('chat').service('Socket', ['Authentication', '$location', '$timeo
   }
 ]).factory('Channels', ['$resource',
   function($resource){
-    return $resource('api/channels/:channelId', {channelId: '@channelId'}, {
+    return $resource('api/channels/:channelId', {channelId: '@_id'}, {
         update : {
           method: 'PUT'
         }

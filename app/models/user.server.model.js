@@ -22,6 +22,11 @@ var UserSchema = new Schema({
     default: 'User',
     required: true
   },
+  color: {
+    type: String,
+    required: true,
+    default: '#000000'
+  },
   password: {
     type: String,
     validate: [
