@@ -14,7 +14,7 @@ var getErrorMessage = function(err) {
 };
 
 exports.messageByID = function(req, res, next, id){
-  Message.findById(id).populate('creator', 'username').exec(function(err, message){
+  Message.findById(id).populate('creator', 'username color').exec(function(err, message){
     if(err) return next(err);
     if(!message) return next(new Error('Failed to load channel' + id));
     req.message = message;

@@ -1,0 +1,107 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.main{
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 15px;
+}
+.header{
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.message-status{
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.messages{
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  flex-grow: 1;
+  margin: 10px;
+  overflow-y: auto;
+}
+.message-author, .message-time{
+}
+
+.message-text{
+  white-space: pre-wrap;
+  font-weight: 300;
+}
+
+
+section{
+  height: 100%;
+}
+body{
+  height: 100vh;
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+footer{
+  max-height: 20%;
+}
+form.message-form{
+  display: flex;
+}
+form.message-form > textarea{
+  font-family: 'Lato', sans-serif;
+  flex-grow: 1;
+  resize: none;
+  outline: none;
+  overflow: auto;
+  border-radius: 5px;
+  border: 1px solid #1C2527;
+  padding: 5px;
+}
+#aside-1{
+  max-width: 200px;
+  background-color: #314A50;
+  color: #ffffff;
+  padding: 10px;
+}
+#aside-1 ul{
+  list-style: none;
+}
+#aside-1 ul a{
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+.aside-2{
+  display: none;
+}
+
+#user-list li.connected a{
+  color: #ACD660;
+}
+
+
+.color-primary-0 { color: #3A6570 }	/* Main Primary color */
+.color-primary-1 { color: #4499AD }
+.color-primary-2 { color: #42808F }
+.color-primary-3 { color: #314A50 }
+.color-primary-4 { color: #1C2527 }
+
+.color-secondary-1-0 { color: #8AA854 }	/* Main Secondary color (1) */
+.color-secondary-1-1 { color: #BAF05A }
+.color-secondary-1-2 { color: #ACD660 }
+.color-secondary-1-3 { color: #677847 }
+.color-secondary-1-4 { color: #353B2A }
+
+.color-secondary-2-0 { color: #57447B }	/* Main Secondary color (2) */
+.color-secondary-2-1 { color: #7652BB }
+.color-secondary-2-2 { color: #6A4F9D }
+.color-secondary-2-3 { color: #433859 }
+.color-secondary-2-4 { color: #24202B }
+
+.color-complement-0 { color: #B4875B }	/* Main Complement color */
+.color-complement-1 { color: #FFAF60 }
+.color-complement-2 { color: #E6A667 }
+.color-complement-3 { color: #82674D }
+.color-complement-4 { color: #3F362D }

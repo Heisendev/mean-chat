@@ -1,6 +1,6 @@
 <div class="wrapper" ng-controller="ChatController">
   <aside id="aside-1" class="aside">
-    <h1>Channels</h1>
+    <h2><i class="green1 fa fa-comments-o"></i> Channels</h2>
       <ul ng-repeat="channel in channels">
           <li>
               <a href="/#!/{{channel.name}}" ng-bind="channel.name"></a>
@@ -11,7 +11,7 @@
           <input type="text" id="name" ng-model="name">
           <input type="submit">
       </form>
-      <h2>Users</h2>
+      <h2><i class="green1 fa fa-users"></i> Users</h2>
       <ul id="user-list">
           <li ng-repeat="user in users" ng-class="{connected : user.isConnected}">
               <a href="/#!/users/edit/{{user._id}}" ng-bind="user.username"></a>
@@ -24,13 +24,13 @@
       <div ng-repeat="message in messages" ng-switch="message.type">
           <strong ng-switch-when='status' class="message-status">
             <span class="" ng-bind="message.created | date: 'HH:mm'"></span>
-            <span class="" ng-bind="message.creator.username"></span>
+            <span class="" ng-bind="message.creator.username" style="color: {{user.color}}"></span>
             <span>is</span>
             <span class="" ng-bind="message.text"></span>
             </strong>
           <span ng-switch-default>
             <span class="message-time" ng-bind="message.created | date: 'HH:mm'"></span>
-            <span ng-hide="message.creator.username === messages[$index - 1].creator.username" class="message-author" ng-bind="message.creator.username"></span>
+            <span ng-hide="message.creator.username === messages[$index - 1].creator.username" class="message-author" ng-bind="message.creator.username" style="color: {{user.color}}"></span>
             <span>:</span>
             <span class="message-text" ng-bind-html="message.text | emoji"></span>
           </span>

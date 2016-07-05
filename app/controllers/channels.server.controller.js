@@ -107,7 +107,7 @@ exports.listMessage = function(req, res){
 				var msgProccessed = 0;
 				channel.messages.forEach(function(message, index){
 					console.log(message);
-					Message.findById(message).populate('creator', 'username').exec(function(err, msg){
+					Message.findById(message).populate('creator', 'username color').exec(function(err, msg){
 						channel.messages[index] = msg;
 						msgProccessed ++;
 						if(msgProccessed === channel.messages.length) {
@@ -116,8 +116,6 @@ exports.listMessage = function(req, res){
 						}
 					});
 				});
-			//console.log('test', channel);
-
 		}
 	});
 };
