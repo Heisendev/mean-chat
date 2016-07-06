@@ -1,15 +1,17 @@
-angular.module('users').controller('usersController', ['Authentication', '$scope','$routeParams', 'UsersAPI',
-	function(Authentication, $scope, $routeParams, UsersAPI){
+angular.module('users').controller('usersController', ['Authentication', '$scope','$routeParams', '$location', 'UsersAPI',
+	function(Authentication, $scope, $routeParams, $location, UsersAPI){
 		console.log('Authentication', Authentication);
 		$scope.user = {} ;
 
-		UsersAPI.get({userId : $routeParams.userId}, function(user){
-			console.log(arguments);
-			$scope.user = user;
-		}, function(err){
-			$scope.errorMsg = "Vous n'avez pas acces a ce formulaire";
-			console.log(err);
-		});
+		if($location.url() !== '/users/new'){
+			UsersAPI.get({userId : $routeParams.userId}, function(user){
+				console.log(arguments);
+				$scope.user = user;
+			}, function(err){
+				$scope.errorMsg = "Vous n'avez pas acces a ce formulaire";
+				console.log(err);
+			});
+		}
 
 		$scope.edit = function(){
 			$scope.user.$update(function(){

@@ -58,7 +58,7 @@ exports.signup = function(req, res, next){
       }
       req.login(user, function(err){
         if(err) return next(err);
-        return res.redirect('/');
+        return res.json(user);
       });
     });
   } else {

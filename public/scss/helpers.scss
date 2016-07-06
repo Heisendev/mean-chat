@@ -20,3 +20,16 @@
 .green3{ color: #ACD660; }
 .green4{ color: #677847; }
 .green5{ color: #353B2A; }
+
+.color-facebook{ color: $facebook-color; }
+.color-twitter{ color: $twitter-color; }
+.color-google{ color: $google-color; }
+
+.txtcenter{
+  text-align: center;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-around;
+}

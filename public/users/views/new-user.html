@@ -1,18 +1,27 @@
 <div id="new-user" ng-controller="usersController">
-    <h2>Edition du Profil</h2>
-    <form ng-submit="create()">
-        <label for="username">Pseudo</label>
-        <input type="text" id="username" ng-model="username" value="username">
-        <label for="password">Password</label>
-        <input type="password" id="password" ng-model="password" value="password">
-        <label for="firstName">Prénom</label>
-        <input type="text" id="firstName" ng-model="firstName" value="firstName">
-        <label for="lastName">Nom</label>
-        <input type="text" id="lastName" ng-model="lastName" value="lastName">
-        <label for="email">Email</label>
-        <input type="email" id="email" ng-model="email" value="email">
-        <label for="color">Color</label>
-        <input type="text" id="color" ng-model="color" value="color">
-        <input type="submit" value="valider">
-    </form>
+    <h2 class="txtcenter">Creation de  mon Profil MEAN SLACK</h2>
+    <div class="flex">
+        <div class="sso txtcenter">
+            <h3>Inscrivez vous via un réseau social...</h3>
+            <a href="/oauth/facebook"><i class="color-facebook fa fa-facebook-official fa-3x"></i></a>
+            <a href="/oauth/twitter"><i class="color-twitter fa fa-twitter-square fa-3x"></i></a>
+            <a href="/oauth/google"><i class="color-google fa fa-google fa-3x"></i></a>
+        </div>
+        <form ng-submit="create()" autocomplete="off">
+            <h3>... ou directement par ce formulaire</h3>
+            <label for="username">Pseudo</label>
+            <input type="text" id="username" ng-model="username" value="username" required autocomplete="off">
+            <label for="password">Password</label>
+            <input type="password" id="password" ng-model="password" value="password" required autocomplete="off">
+            <label for="firstName">Prénom</label>
+            <input type="text" id="firstName" ng-model="firstName" value="firstName" required autocomplete="off">
+            <label for="lastName">Nom</label>
+            <input type="text" id="lastName" ng-model="lastName" value="lastName" required autocomplete="off">
+            <label for="email">Email</label>
+            <input type="email" id="email" ng-model="email" value="email" required autocomplete="off">
+            <label for="color">Color</label>
+            <input type="text" id="color" ng-model="color" value="color" ng-pattern="/#[A-F0-9]{6}/" placeholder="#000000">
+            <input type="submit" value="valider">
+        </form>
+    </div>
 </div>
