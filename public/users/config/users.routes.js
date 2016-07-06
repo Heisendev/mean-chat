@@ -6,6 +6,8 @@ angular.module('users').config(['$routeProvider',
 			})
 			.when('/users/new', {
 				templateUrl: 'users/views/new-user.html'
-			});
+			}).when('/users/login', {
+			templateUrl: 'users/views/login.html'
+		});
 	}
 ]);

@@ -1,18 +1,19 @@
-<div>
-    <a href="/oauth/facebook">Sign in with Facebook</a>
-    <a href="/oauth/twitter">Sign in with Twitter</a>
-    <a href="/oauth/google">Sign in with Google</a>
-    <form action="/signin" method="post">
-        <div>
+<div id="new-user" ng-controller="usersController">
+    <h2 class="txtcenter">Creation de  mon Profil MEAN SLACK</h2>
+    <div class="flex">
+        <div class="sso txtcenter">
+            <h3>Connectez-vous via un réseau social...</h3>
+            <a href="/oauth/facebook"><i class="color-facebook fa fa-facebook-official fa-3x"></i></a>
+            <a href="/oauth/twitter"><i class="color-twitter fa fa-twitter-square fa-3x"></i></a>
+            <a href="/oauth/google"><i class="color-google fa fa-google fa-3x"></i></a>
+        </div>
+        <form ng-submit="login()" autocomplete="off">
+            <h3>... ou directement par ce formulaire</h3>
             <label>Username:</label>
-            <input type="text" name="username" />
-        </div>
-        <div>
+            <input type="text" name="username" ng-model="username" required/>
             <label>Password:</label>
-            <input type="password" name="password" />
-        </div>
-        <div>
-            <input type="submit" value="Sign in" />
-        </div>
-    </form>
+            <input type="password" name="password" ng-model="password" required/>
+            <input type="submit" value="valider">
+        </form>
+    </div>
 </div>

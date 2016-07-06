@@ -14,5 +14,9 @@ angular.module('users').factory('Authentication', [
       }
     });
   }
+]).factory('SigninAPI', ['$resource',
+  function($resource){
+    return $resource('api/signin');
+  }
 ]);
 

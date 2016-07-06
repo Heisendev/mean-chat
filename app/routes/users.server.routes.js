@@ -13,13 +13,23 @@ module.exports = function(app) {
     .post(users.signup);
 
 
-  app.route('/signin')
+  app.route('/api/signin')
     .get(users.renderSignin)
-    .post(passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/signin',
+    .post(function(req,res,next){
+      passport.authenticate('local', function(err, user) {
+        if (err) { return next(err); }
+        if (!user) { return res.status(404).send({message: 'user not found'}); }
+        req.logIn(user, function(err) {
+          if (err) { return next(err); }
+          return res.json(user);
+        });
+      })(req, res, next);
+    });
+    /*.post(passport.authenticate('local', {
+      successRedirect: '/#!/chat/general',
+      failureRedirect: '/#!/users/login',
       failureFlash: true
-    }));
+    }));*/
 
 
   app.get('/oauth/facebook', passport.authenticate('facebook', {

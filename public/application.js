@@ -1,6 +1,6 @@
 var appName = 'mean-chat';
 
-var app = angular.module(appName, ['dbaq.emoji', 'ngResource', 'ngRoute', 'users', 'example', 'chat', 'users', 'luegg.directives',  'ngSanitize'])
+var app = angular.module(appName, ['dbaq.emoji', 'ngResource', 'ngRoute', 'users', 'example', 'chat', 'luegg.directives',  'ngSanitize'])
   .config(function(emojiConfigProvider){
     emojiConfigProvider.addAlias("smile", ":)");
   });

@@ -45,6 +45,7 @@ exports.renderSignup = function(req, res, next){
 
 exports.signup = function(req, res, next){
   if(!req.user){
+    console.log('new user body == ', req.body);
     var user = new User(req.body);
     var message = null;
 
@@ -154,7 +155,9 @@ exports.userByID = function(req, res, next, id){
 };
 
 exports.hasAuthorization = function(req, res, next){
-  if(req.userFound.id !== req.user.id && req.user.role !== 'admin'){
+  console.log(req.userFound.id === req.user.id);
+  console.log(req.user.role === 'Admin');
+  if((req.user.role != 'Admin') && (req.userFound.id !== req.user.id)){
     return res.status(403).send({
       message: 'User is not authorized'
     });

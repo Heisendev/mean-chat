@@ -1,9 +1,9 @@
-angular.module('users').controller('usersController', ['Authentication', '$scope','$routeParams', '$location', 'UsersAPI',
-	function(Authentication, $scope, $routeParams, $location, UsersAPI){
+angular.module('users').controller('usersController', ['Authentication','$window', '$scope','$routeParams', '$location', 'UsersAPI', 'SigninAPI',
+	function(Authentication, $window, $scope, $routeParams, $location, UsersAPI, SigninAPI){
 		console.log('Authentication', Authentication);
 		$scope.user = {} ;
 
-		if($location.url() !== '/users/new'){
+		if($location.url() !== '/users/login' || $location.url() !== '/users/new'){
 			UsersAPI.get({userId : $routeParams.userId}, function(user){
 				console.log(arguments);
 				$scope.user = user;
@@ -19,8 +19,8 @@ angular.module('users').controller('usersController', ['Authentication', '$scope
 			}, function(){
 				console.log('update failed');
 			});
-			console.log('on edit');
 		};
+
 		$scope.create = function(){
 			var user = new UsersAPI({
 				username : this.username,
@@ -36,8 +36,21 @@ angular.module('users').controller('usersController', ['Authentication', '$scope
 				console.log('it failed dammit', err);
 			});
 		};
+
 		$scope.logout = function(){
 			console.log('in logout');
-		}
+		};
+
+		$scope.login = function(){
+			var login = new SigninAPI({
+				username: this.username,
+				password: this.password
+			});
+			login.$save(function(response){
+				$window.location = '/';
+			}, function(err){
+				console.log('not logged', err);
+			});
+		};
 	}
 ]);

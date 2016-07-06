@@ -3,8 +3,8 @@
     <h2><i class="green1 fa fa-comments-o"></i> Channels</h2>
       <ul ng-repeat="channel in channels">
           <li>
+              <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'"><i class="fa blue2 fa-minus-square-o" aria-hidden="true"></i> </a>
               <a href="/#!/{{channel.name}}" ng-bind="channel.name"></a>
-              <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'">x</a>
           </li>
       </ul>
       <form ng-submit="createChannel();">
@@ -13,8 +13,8 @@
       </form>
       <h2><i class="green1 fa fa-users"></i> Users</h2>
       <ul id="user-list">
-          <li ng-repeat="user in users" ng-class="{connected : user.isConnected}">
-              <a href="/#!/users/edit/{{user._id}}" ng-bind="user.username"></a>
+          <li ng-repeat="u in users" ng-class="{connected : u.isConnected}">
+              <a href="/#!/users/edit/{{u._id}}" ng-bind="u.username" ng-class="{disabled: (user.id !== u.id && user.role !== 'Admin')}"></a>
           </li>
       </ul>
   </aside>
@@ -40,6 +40,18 @@
 
     <aside class="aside aside-2">Aside 2</aside>
     <footer class="footer">
+        <i ng-click="toggleEmojis()" class="fa fa-smile-o" aria-hidden="true"></i>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">×</span>
+                <div>
+                    <span ng-repeat="emoji in emojis" ng-bind-html="emoji|emoji" ng-click="addEmoji(emoji)"></span>
+                </div>
+            </div>
+
+        </div>
         <form class="message-form">
             <textarea ng-keydown="keyPressed($event)" id="message-input" type="text" ng-model="messageText" placeholder="Remember, be nice!" rows="3"></textarea>
         </form>

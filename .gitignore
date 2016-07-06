@@ -3,3 +3,4 @@ node_modules
 public/lib/
 public/scss/.sass-cache/
 public/scss/style.css
+*.scssc
