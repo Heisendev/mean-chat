@@ -1,6 +1,9 @@
 <div id="user-edit" ng-controller="usersController">
     <h2>Edition du Profil</h2>
-    <form ng-submit="edit()">
+    <div ng-if="errorMsg">
+        Erreur : {{errorMsg}}
+    </div>
+    <form ng-submit="edit()" ng-disabled="errorMsg.length">
         <label for="username">Pseudo</label>
         <input type="text" id="username" ng-model="user.username" value="user.username">
         <label for="firstName">Prénom</label>
@@ -9,6 +12,8 @@
         <input type="text" id="lastName" ng-model="user.lastName" value="user.lastName">
         <label for="email">Email</label>
         <input type="email" id="email" ng-model="user.email" value="user.email">
+        <label for="color">Color</label>
+        <input type="text" id="color" ng-model="user.color" value="user.color">
         <input type="submit" value="valider">
     </form>
 </div>

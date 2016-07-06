@@ -4,16 +4,8 @@ module.exports = function(io, socket){
     text: 'connected',
     created: Date.now(),
     creator: {
-      username : socket.request.user.username
-    }
-  });
-
-  io.emit('conection', {
-    type: 'status',
-    text: 'connected',
-    created: Date.now(),
-    creator: {
-      id : socket.request.user.id
+      username : socket.request.user.username,
+      color: socket.request.user.color
     }
   });
 
@@ -21,7 +13,8 @@ module.exports = function(io, socket){
     message.type = 'message';
     message.created = Date.now();
     message.creator = {
-      username : socket.request.user.username
+      username : socket.request.user.username,
+      color: socket.request.user.color
     };
     io.emit('chatMessage', message);
   });
@@ -33,7 +26,8 @@ module.exports = function(io, socket){
       created: Date.now(),
       creator: {
         id : socket.request.user.id,
-        username : socket.request.user.username
+        username : socket.request.user.username,
+        color: socket.request.user.color
       }
     });
   });

@@ -24,13 +24,14 @@
       <div ng-repeat="message in messages" ng-switch="message.type">
           <strong ng-switch-when='status' class="message-status">
             <span class="" ng-bind="message.created | date: 'HH:mm'"></span>
-            <span class="" ng-bind="message.creator.username" style="color: {{user.color}}"></span>
+            <span class="" ng-bind="message.creator.username" style="color: {{message.creator.color}}"></span>
             <span>is</span>
             <span class="" ng-bind="message.text"></span>
             </strong>
+
           <span ng-switch-default>
             <span class="message-time" ng-bind="message.created | date: 'HH:mm'"></span>
-            <span ng-hide="message.creator.username === messages[$index - 1].creator.username" class="message-author" ng-bind="message.creator.username" style="color: {{user.color}}"></span>
+            <span ng-hide="message.creator.username === messages[$index - 1].creator.username" class="message-author" ng-bind="message.creator.username" style="color: {{message.creator.color}}"></span>
             <span>:</span>
             <span class="message-text" ng-bind-html="message.text | emoji"></span>
           </span>

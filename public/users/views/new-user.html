@@ -1,0 +1,18 @@
+<div id="new-user" ng-controller="usersController">
+    <h2>Edition du Profil</h2>
+    <form ng-submit="create()">
+        <label for="username">Pseudo</label>
+        <input type="text" id="username" ng-model="username" value="username">
+        <label for="password">Password</label>
+        <input type="password" id="password" ng-model="password" value="password">
+        <label for="firstName">Prénom</label>
+        <input type="text" id="firstName" ng-model="firstName" value="firstName">
+        <label for="lastName">Nom</label>
+        <input type="text" id="lastName" ng-model="lastName" value="lastName">
+        <label for="email">Email</label>
+        <input type="email" id="email" ng-model="email" value="email">
+        <label for="color">Color</label>
+        <input type="text" id="color" ng-model="color" value="color">
+        <input type="submit" value="valider">
+    </form>
+</div>

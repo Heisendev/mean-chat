@@ -53,14 +53,6 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
       $scope.messages.push(message);
     });
 
-    Socket.on('conection', function(user){
-      for (var i = 0, len = $scope.users.length; i < len; i++) {
-        if($scope.users[i].id === user.creator.id){
-          $scope.users[i].isConnected = true;
-        }
-      }
-    });
-
     $scope.$on('$destroy', function(){
       Socket.removeListener('chatMessage');
     });

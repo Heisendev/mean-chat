@@ -123,6 +123,25 @@ exports.read = function(req, res){
   res.json(req.userFound);
 };
 
+exports.update = function(req, res){
+  var user = req.user;
+  user.username = req.body.username;
+  user.lastName = req.body.lastName;
+  user.firstName = req.body.firstName;
+  user.email = req.body.email;
+  user.color = req.body.color;
+
+  user.save(function(err){
+    if(err){
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      res.json(user);
+    }
+  });
+};
+
 
 exports.userByID = function(req, res, next, id){
   User.findById(id).exec(function(err, user){
