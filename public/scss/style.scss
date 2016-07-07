@@ -77,23 +77,41 @@ form.message-form{
   color: #ffffff;
   padding: 10px;
   ul{
+    font-weight: $h-normal;
     list-style: none;
+    font-size: $h-normal-size;
     a{
       text-decoration: none;
       color: #FFFFFF;
     }
   }
+  @media handheld, only screen and (max-device-width: 600px), only screen and (max-width: 600px) {
+    position: absolute;
+    height: 100%;
+    &.expanded{
+      padding: 10px;
+      width: 100%;
+      transition:width 1s, padding 0.5s ;
+      .content{
+        display: block;
+      }
+
+    }
+    &.shrinked{
+      width: 0px;
+      transition:width 1s, padding 0.5s;
+      padding: 10px 0;
+      .content{
+        display: none;
+      }
+    }
+  }
+
 }
 .aside-2{
   display: none;
 }
-#user-list {
-  li.connected{
-    a{
-    color: #ACD660;
-    }
-  }
-}
+
 #user-edit{
   form{
     display: flex;
@@ -101,11 +119,13 @@ form.message-form{
     width: 300px;
     margin: auto;
     padding: 15px;
+    label{
+      margin-bottom:5px;
+    }
     input[type='text'], input[type='email'], input[type='password']{
       font-family: $primary-font;
       display: block;
       margin: 0 0 10px;
-      width: 100%;
       font-size: 18px;
       appearance: none;
       box-shadow: none;
@@ -113,6 +133,7 @@ form.message-form{
       padding: 10px;
       border: solid 1px $color-primary-3;
       transition: box-shadow 0.3s, border 0.3s;
+      border: solid 1px $color-primary-2;
       &:focus{
         outline: none;
         border: solid 1px $color-primary-2;

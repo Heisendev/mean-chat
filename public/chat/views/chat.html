@@ -1,25 +1,28 @@
 <div class="wrapper" ng-controller="ChatController">
-  <aside id="aside-1" class="aside">
-    <h2><i class="green1 fa fa-comments-o"></i> Channels</h2>
-      <ul ng-repeat="channel in channels">
-          <li>
-              <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'"><i class="fa blue2 fa-minus-square-o" aria-hidden="true"></i> </a>
-              <a href="/#!/{{channel.name}}" ng-bind="channel.name"></a>
-          </li>
-      </ul>
-      <form ng-submit="createChannel();">
-          <input type="text" id="name" ng-model="name">
-          <input type="submit">
-      </form>
-      <h2><i class="green1 fa fa-users"></i> Users</h2>
-      <ul id="user-list">
-          <li ng-repeat="u in users" ng-class="{connected : u.isConnected}">
-              <a href="/#!/users/edit/{{u._id}}" ng-bind="u.username" ng-class="{disabled: (user.id !== u.id && user.role !== 'Admin')}"></a>
-          </li>
-      </ul>
+  <aside id="aside-1" class="aside shrinked">
+      <div class="content">
+          <i class="mobile-only fa fa-arrow-left" aria-hidden="true" ng-click="toggleMenu();"></i>
+          <h2><i class="blue2 fa fa-comments-o"></i> Channels</h2>
+          <ul id="chanel-list">
+              <li ng-repeat="channel in channels">
+                  <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'"><i class="fa blue2 fa-minus-square-o" aria-hidden="true"></i> </a>
+                  <a href="/#!/{{channel.name}}" ng-bind="channel.name"></a>
+              </li>
+          </ul>
+          <form name="addChannelForm" ng-submit="createChannel();">
+              <input type="text" id="name" ng-model="channelName">
+              <input type="submit">
+          </form>
+          <h2><i class="blue2 fa fa-users"></i> Users</h2>
+          <ul id="user-list">
+              <li ng-repeat="u in users" ng-class="{connected : u.isConnected}">
+                  {{u.username}}<a href="/#!/users/edit/{{u._id}}"  ng-class="{disabled: (user.id !== u.id && user.role !== 'Admin')}">&nbsp;<i class="fa blue2 fa-cog" aria-hidden="true"></i></a>
+              </li>
+          </ul>
+      </div>
   </aside>
   <div class="main">
-    <div class="header" ng-bind="channel"></div>
+    <div class="header"><i class="mobile-only fa fa-bars" aria-hidden="true" ng-click="toggleMenu();"></i>{{channel}}</div>
     <div class="messages" scroll-glue>
       <div ng-repeat="message in messages" ng-switch="message.type">
           <strong ng-switch-when='status' class="message-status">
@@ -45,14 +48,14 @@
 
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close">×</span>
-                <div>
+                <span class="close" ng-click="closeModal()">×</span>
+                <div style="display: flex; flex-wrap: wrap;">
                     <span ng-repeat="emoji in emojis" ng-bind-html="emoji|emoji" ng-click="addEmoji(emoji)"></span>
                 </div>
             </div>
 
         </div>
-        <form class="message-form">
+        <form name="newMessageForm" class="message-form">
             <textarea ng-keydown="keyPressed($event)" id="message-input" type="text" ng-model="messageText" placeholder="Remember, be nice!" rows="3"></textarea>
         </form>
     </footer>

@@ -33,3 +33,10 @@
   display: flex;
   justify-content: space-around;
 }
+.mobile-only{
+  display: none;
+  @media handheld, only screen and (max-device-width: 600px), only screen and (max-width: 600px) {
+    display: inline-block;
+    margin-right: 15px;
+  }
+}

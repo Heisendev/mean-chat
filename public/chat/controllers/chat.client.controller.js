@@ -38,11 +38,12 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
         };
         var message = new Messages({channelId: $scope.channel, text: msg.text});
         message.$save(function(){
+          $scope.messageText = '';
         }, function(errorResponse){
           console.log('error', errorResponse);
           $scope.error = errorResponse.data.message;
         });
-        $scope.messageText = '';
+
         Socket.emit('chatMessage', msg);
       }
     };
@@ -58,10 +59,14 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
 
     $scope.createChannel = function(){
       var channel = new Channels({
-        name: this.name
+        name: this.channelName
       });
       channel.$save(function(response){
         $scope.channels.push(response);
+        $scope.channelName = '';
+        $scope.addChannelForm.$setPristine();
+        $scope.addChannelForm.$submitted = false;
+        $scope.addChannelForm.$setUntouched();
       }, function(errorResponse){
         $scope.error = errorResponse.data.message;
       });
@@ -83,6 +88,19 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
         });
       }
     };
+    $scope.toggleMenu = function(){
+      var el = angular.element(document.querySelector('#aside-1'));
+      if(el.hasClass('expanded')){
+        el.addClass('shrinked').removeClass('expanded');
+      } else {
+        el.removeClass('shrinked').addClass('expanded');
+      }
+
+    };
+
+    $scope.closeModal = function(){
+      angular.element(document.querySelector('#myModal')).css('display', 'none');
+    };
 
     $scope.toggleEmojis = function(){
       angular.element(document.querySelector('#myModal')).css('display', 'block');
@@ -92,6 +110,11 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
       var el = angular.element(document.querySelector('#message-input'));
       el[0].value += emoji;
       angular.element(document.querySelector('#myModal')).css('display', 'none');
+      console.log($scope);
+      /*$scope.newMessageForm.messageText.$dirty = true;
+      $scope.newMessageForm.messageText.$touched = true;
+      $scope.newMessageForm.messageText.$viewValue = el[0];*/
+      console.log($scope.newMessageForm.messageText);
     };
 
     $scope.emojis = [
@@ -112,7 +135,7 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
       ":sparkling_heart:", ":sparkles:", ":star:", ":star2:", ":dizzy:", ":boom:",
       ":collision:", ":anger:", ":exclamation:", ":question:", ":grey_exclamation:",
       ":grey_question:", ":zzz:", ":dash:", ":sweat_drops:", ":notes:", ":musical_note:",
-      ":fire:", ":hankey:", ":poop:", ":shit:", ":\\+1:", ":thumbsup:", ":-1:", ":thumbsdown:",
+      ":fire:", ":hankey:", ":poop:", ":shit:", ":\+1:", ":thumbsup:", ":-1:", ":thumbsdown:",
       ":ok_hand:", ":punch:", ":facepunch:", ":fist:", ":v:", ":wave:", ":hand:", ":raised_hand:",
       ":open_hands:", ":point_up:", ":point_down:", ":point_left:", ":point_right:",
       ":raised_hands:", ":pray:", ":point_up_2:", ":clap:", ":muscle:", ":metal:", ":fu:",
