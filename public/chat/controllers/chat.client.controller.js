@@ -95,21 +95,21 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
       } else {
         el.removeClass('shrinked').addClass('expanded');
       }
-
     };
 
-    $scope.closeModal = function(){
-      angular.element(document.querySelector('#myModal')).css('display', 'none');
-    };
-
-    $scope.toggleEmojis = function(){
-      angular.element(document.querySelector('#myModal')).css('display', 'block');
+    $scope.toggleModal = function(id){
+      var el = angular.element(document.querySelector('#'+id));
+      if(el.css('display') == 'block'){
+        el.css('display', 'none');
+      } else {
+        el.css('display', 'block');
+      }
     };
 
     $scope.addEmoji = function(emoji){
       var el = angular.element(document.querySelector('#message-input'));
       el[0].value += emoji;
-      angular.element(document.querySelector('#myModal')).css('display', 'none');
+      angular.element(document.querySelector('#modal-emojis')).css('display', 'none');
       console.log($scope);
       /*$scope.newMessageForm.messageText.$dirty = true;
       $scope.newMessageForm.messageText.$touched = true;

@@ -2,17 +2,13 @@
   <aside id="aside-1" class="aside shrinked">
       <div class="content">
           <i class="mobile-only fa fa-arrow-left" aria-hidden="true" ng-click="toggleMenu();"></i>
-          <h2><i class="blue2 fa fa-comments-o"></i> Channels</h2>
+          <h2><i class="blue2 fa fa-comments-o"></i> Channels</h2> <i class="fa fa-plus-circle" aria-hidden="true" ng-click="toggleModal('add-channel-modal');"></i>
           <ul id="chanel-list">
               <li ng-repeat="channel in channels">
                   <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'"><i class="fa blue2 fa-minus-square-o" aria-hidden="true"></i> </a>
                   <a href="/#!/{{channel.name}}" ng-bind="channel.name"></a>
               </li>
           </ul>
-          <form name="addChannelForm" ng-submit="createChannel();">
-              <input type="text" id="name" ng-model="channelName">
-              <input type="submit">
-          </form>
           <h2><i class="blue2 fa fa-users"></i> Users</h2>
           <ul id="user-list">
               <li ng-repeat="u in users" ng-class="{connected : u.isConnected}">
@@ -43,21 +39,33 @@
 
     <aside class="aside aside-2">Aside 2</aside>
     <footer class="footer">
-        <i ng-click="toggleEmojis()" class="fa fa-smile-o" aria-hidden="true"></i>
-        <div id="myModal" class="modal">
+        <i ng-click="toggleModal('modal-emojis')" class="fa fa-smile-o" aria-hidden="true"></i>
+        <div id="modal-emojis" class="modal">
 
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close" ng-click="closeModal()">×</span>
+                <span class="close" ng-click="toggleModal('modal-emojis')">×</span>
                 <div style="display: flex; flex-wrap: wrap;">
                     <span ng-repeat="emoji in emojis" ng-bind-html="emoji|emoji" ng-click="addEmoji(emoji)"></span>
                 </div>
             </div>
-
         </div>
         <form name="newMessageForm" class="message-form">
             <textarea ng-keydown="keyPressed($event)" id="message-input" type="text" ng-model="messageText" placeholder="Remember, be nice!" rows="3"></textarea>
         </form>
     </footer>
   </div>
+    <div id="add-channel-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" ng-click="toggleModal('add-channel-modal')">×</span>
+            <div style="display: flex; flex-wrap: wrap;">
+                <h4>Ajouter un channel</h4>
+                <form name="addChannelForm" ng-submit="createChannel();">
+                    <input type="text" id="name" ng-model="channelName">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+

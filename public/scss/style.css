@@ -2336,7 +2336,8 @@ form.message-form {
     padding: 5px; }
 
 #aside-1 {
-  max-width: 200px;
+  flex-shrink: 0;
+  width: 200px;
   background-color: #314A50;
   color: #ffffff;
   padding: 10px; }
@@ -2353,7 +2354,7 @@ form.message-form {
       height: 100%; }
       #aside-1.expanded {
         padding: 10px;
-        width: 100%;
+        width: 200px;
         transition: width 1s, padding 0.5s; }
         #aside-1.expanded .content {
           display: block; }
@@ -2492,5 +2493,24 @@ form.message-form {
     color: #000;
     text-decoration: none;
     cursor: pointer; }
+
+#add-channel-modal input[type='text'], #add-channel-modal input[type='email'], #add-channel-modal input[type='password'] {
+  font-family: "Lato", sans-serif;
+  display: block;
+  margin: 0 0 10px;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 0;
+  padding: 10px;
+  border: solid 1px #314A50;
+  transition: box-shadow 0.3s, border 0.3s;
+  border: solid 1px #42808F; }
+  #add-channel-modal input[type='text']:focus, #add-channel-modal input[type='email']:focus, #add-channel-modal input[type='password']:focus {
+    outline: none;
+    border: solid 1px #42808F;
+    box-shadow: 0 0 5px 1px #314A50; }
 
 /*# sourceMappingURL=style.css.map */
