@@ -2272,6 +2272,14 @@
       display: inline-block;
       margin-right: 15px; } }
 
+.charts div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white; }
+
 .wrapper {
   display: flex;
   height: 100%; }

@@ -1,10 +1,10 @@
 angular.module('chat').config(['$routeProvider',
   function($routeProvider){
     $routeProvider
-      .when('/:channel', {
+      .when('/chat/:channel', {
         templateUrl: 'chat/views/chat.html'
       }).otherwise({
-      redirectTo: '/general'
+      redirectTo: '/chat/general'
     });
   }
 ]);

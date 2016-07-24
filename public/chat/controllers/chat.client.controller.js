@@ -5,6 +5,7 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
     $scope.glued = true;
 
     $scope.messages = [];
+    $scope.messageText = "";
 
     $scope.users = UsersAPI.query();
     var messagesChan = Messages.query({channelId: $scope.channel}, function(res){
@@ -38,7 +39,10 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
         };
         var message = new Messages({channelId: $scope.channel, text: msg.text});
         message.$save(function(){
+          console.log($scope, event);
           $scope.messageText = '';
+          $scope.newMessageForm.$setPristine();
+          $scope.newMessageForm.$setUntouched();
         }, function(errorResponse){
           console.log('error', errorResponse);
           $scope.error = errorResponse.data.message;
@@ -67,6 +71,7 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
         $scope.addChannelForm.$setPristine();
         $scope.addChannelForm.$submitted = false;
         $scope.addChannelForm.$setUntouched();
+        $scope.toggleModal('add-channel-modal');
       }, function(errorResponse){
         $scope.error = errorResponse.data.message;
       });
@@ -107,14 +112,16 @@ angular.module('chat').controller('ChatController', ['$scope', 'Authentication',
     };
 
     $scope.addEmoji = function(emoji){
-      var el = angular.element(document.querySelector('#message-input'));
-      el[0].value += emoji;
+      console.log()
+      /*var el = angular.element(document.querySelector('#message-input'));
+      el[0].value += emoji;*/
+      $scope.messageText += emoji;
       angular.element(document.querySelector('#modal-emojis')).css('display', 'none');
       console.log($scope);
+      $scope.newMessageForm.$setDirty();
       /*$scope.newMessageForm.messageText.$dirty = true;
       $scope.newMessageForm.messageText.$touched = true;
       $scope.newMessageForm.messageText.$viewValue = el[0];*/
-      console.log($scope.newMessageForm.messageText);
     };
 
     $scope.emojis = [

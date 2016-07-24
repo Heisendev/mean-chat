@@ -2,7 +2,7 @@
   <aside id="aside-1" class="aside shrinked">
       <div class="content">
           <i class="mobile-only fa fa-arrow-left" aria-hidden="true" ng-click="toggleMenu();"></i>
-          <h2><i class="blue2 fa fa-comments-o"></i> Channels</h2> <i class="fa fa-plus-circle" aria-hidden="true" ng-click="toggleModal('add-channel-modal');"></i>
+          <h2><i class="blue2 fa fa-comments-o"></i> Channels <i class="fa fa-plus-circle" aria-hidden="true" ng-click="toggleModal('add-channel-modal');"></i></h2>
           <ul id="chanel-list">
               <li ng-repeat="channel in channels">
                   <a href="" ng-click="removeChannel(channel)" ng-show="user.role === 'Admin'"><i class="fa blue2 fa-minus-square-o" aria-hidden="true"></i> </a>
